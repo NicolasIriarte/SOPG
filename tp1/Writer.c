@@ -84,7 +84,8 @@ int main(void) {
     fgets(outputBuffer + strlen(DATA_TOKEN), BUFFER_SIZE - strlen(DATA_TOKEN),
           stdin);
 
-    /* Prepend the string "DATA:" to the output buffer */
+    /* Remove newline char */
+    outputBuffer[strlen(outputBuffer) - 1] = '\0';
 
     /* Write buffer to named fifo. Strlen - 1 to avoid sending \n char */
     if ((bytesWrote = HandleFifoWrite(outputBuffer)) == -1) {
@@ -93,6 +94,10 @@ int main(void) {
       printf("writer: wrote %d bytes\n", bytesWrote);
     }
   }
+
+  /* Close named fifo */
+  close(fd);
+
   return 0;
 }
 

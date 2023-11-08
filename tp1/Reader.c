@@ -101,6 +101,9 @@ int main(void) {
   fclose(signals);
   fclose(log);
 
+  /* Close named fifo */
+  close(fd);
+
   return 0;
 }
 
